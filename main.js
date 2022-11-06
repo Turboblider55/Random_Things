@@ -1,0 +1,112 @@
+const canvas = document.querySelector('canvas');
+const Width = window.innerWidth;
+const Height = window.innerHeight;
+
+canvas.width = Width;
+canvas.height = Height;
+
+const ctx = canvas.getContext('2d');
+
+let GridIsOn = false;
+
+const SwitchGrid = ()=> {
+    GridIsOn ? GridIsOn = false : GridIsOn = true;
+}
+
+
+let MOUSE = {
+    pos:new vec2(0,0),
+    pressed:false,
+    saved:false
+}
+
+addEventListener('mousedown',event=>{
+    if(event.button == 0){
+        MOUSE.pos.x = event.clientX;
+        MOUSE.pos.y = event.clientY;
+        //console.log(MOUSE.pos)
+        console.log(quadtree)
+        MOUSE.pressed = true;
+    }
+})
+addEventListener('mouseup',event=>{
+    if(event.button == 0){
+        MOUSE.pressed = false;
+        MOUSE.saved = false;
+    }
+})
+
+
+const boundrie = new Rect(Width / 2,Height / 2,Width / 2,Height / 2);
+let quadtree = new QuadTree(boundrie,0,5,0);
+
+let Points = [];
+
+
+while(Points.length < 100){
+    Points.push(new Boid());
+}
+let DeltaTime, CurrentTime, PrevTime = 0;
+
+let range;
+
+
+let loop = () =>{
+    // range.x = MOUSE.pos.x;
+    // range.y = MOUSE.pos.y;
+    CurrentTime = performance.now() / 1000.0;
+    DeltaTime = CurrentTime - PrevTime;
+    //console.log(DeltaTime)
+    PrevTime = CurrentTime;
+
+    // for(let i of Points){
+    //     i.AddVelocity(DeltaTime);
+    //     i.CheckCollision();
+    // }
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0,0,Width,Height);
+
+    // if(MOUSE.pressed && !MOUSE.saved){
+    //     quadtree.insert(new vec2(MOUSE.pos.x,MOUSE.pos.y));
+    //     MOUSE.saved = true;
+    // }
+
+    quadtree = new QuadTree(boundrie,0,5,0);
+    for(let i of Points){
+        quadtree.insert(i);
+    }
+
+    GridIsOn && quadtree.show(ctx);
+
+    for(let boid of Points){
+       
+
+        range = new Rect(boid.pos.x,boid.pos.y,25,25);
+        // ctx.beginPath();
+        // ctx.strokeStyle = 'red';
+        // ctx.strokeWidth = 2;
+        // ctx.rect(range.x - range.w,range.y - range.h,range.w * 2,range.h * 2);
+        // ctx.stroke();
+        // ctx.closePath();
+
+        //let count = 0;
+        let points = quadtree.query(range);
+        //console.log(count)
+        boid.flock(points);
+        boid.Update(DeltaTime);
+        boid.Border(0,Width,0,Height);
+
+        boid.Show(ctx);
+        // for(let point of points){
+        //     ctx.beginPath();
+        //     ctx.fillStyle = 'red';
+        //     ctx.arc(point.pos.x,point.pos.y,5,0,Math.PI * 2);
+        //     ctx.fill();
+        //     ctx.closePath();
+        // }
+    }
+    requestAnimationFrame(loop)
+}
+
+loop();

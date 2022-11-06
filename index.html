@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boids_Simulation</title>
+</head>
+<style>
+    *{
+        margin: 0 auto;
+    }
+    body{
+        overflow: hidden;
+    }
+    canvas{
+        background-color: black;
+    }
+    #Tooner{
+        position: absolute;
+        color: white;
+    }
+</style>
+<body>
+    <form action="" id="Tooner">
+        <label for="grid">Show Grid</label>
+        <input type="checkbox" name="grid" id="grid" onclick="SwitchGrid()">
+    </form>
+    <canvas></canvas>
+    <script src="Vector.js"></script>
+    <script src="Boids.js"></script>
+    <script src="Data_Structures.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
