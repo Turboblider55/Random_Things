@@ -9,11 +9,28 @@ const ctx = canvas.getContext('2d');
 
 let GridIsOn = false;
 let RangeIsOn = false;
+let range;
+let Points = [];
+let DeltaTime, CurrentTime, PrevTime = 0;
 
 const SwitchGrid = (num)=> {
     switch(num){
         case 1: GridIsOn ? GridIsOn = false : GridIsOn = true; break;
         case 2: RangeIsOn ? RangeIsOn = false : RangeIsOn = true; break;
+        case 3: CreateBoids(+document.querySelector('#boidcount').value);break; 
+    }
+}
+
+const CreateBoids = (num) => {
+    if(num != Points.length){
+
+        if(Points.length < num)
+        while(Points.length < num){
+            Points.push(new Boid());
+        }
+
+        if(Points.length > num)
+            Points.splice(num,Points.length)
     }
 }
 
@@ -29,7 +46,7 @@ addEventListener('mousedown',event=>{
         MOUSE.pos.x = event.clientX;
         MOUSE.pos.y = event.clientY;
         //console.log(MOUSE.pos)
-        console.log(quadtree)
+        //console.log(quadtree)
         MOUSE.pressed = true;
     }
 })
@@ -44,16 +61,8 @@ addEventListener('mouseup',event=>{
 const boundrie = new Rect(Width / 2,Height / 2,Width / 2,Height / 2);
 let quadtree = new QuadTree(boundrie,0,5,0);
 
-let Points = [];
 
-
-while(Points.length < 100){
-    Points.push(new Boid());
-}
-let DeltaTime, CurrentTime, PrevTime = 0;
-
-let range;
-
+CreateBoids(100);
 
 let loop = () =>{
     // range.x = MOUSE.pos.x;
