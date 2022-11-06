@@ -19,12 +19,23 @@
     #Tooner{
         position: absolute;
         color: white;
+        display: flex;
+        flex-direction: column;
     }
 </style>
 <body>
     <form action="" id="Tooner">
-        <label for="grid">Show Grid</label>
-        <input type="checkbox" name="grid" id="grid" onclick="SwitchGrid()">
+        <fieldset>
+        <legend>Things To Change</legend>
+            <div>
+                <label for="grid">Show Grid</label>
+                <input type="checkbox" name="grid" id="grid" onclick="SwitchGrid(1)">
+            </div>
+            <div>
+                <label for="grid">Show Individual Ranges</label>
+                <input type="checkbox" name="grid" id="grid" onclick="SwitchGrid(2)">
+            </div>
+        </fieldset>
     </form>
     <canvas></canvas>
     <script src="Vector.js"></script>

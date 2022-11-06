@@ -8,9 +8,13 @@ canvas.height = Height;
 const ctx = canvas.getContext('2d');
 
 let GridIsOn = false;
+let RangeIsOn = false;
 
-const SwitchGrid = ()=> {
-    GridIsOn ? GridIsOn = false : GridIsOn = true;
+const SwitchGrid = (num)=> {
+    switch(num){
+        case 1: GridIsOn ? GridIsOn = false : GridIsOn = true; break;
+        case 2: RangeIsOn ? RangeIsOn = false : RangeIsOn = true; break;
+    }
 }
 
 
@@ -83,12 +87,14 @@ let loop = () =>{
        
 
         range = new Rect(boid.pos.x,boid.pos.y,25,25);
-        // ctx.beginPath();
-        // ctx.strokeStyle = 'red';
-        // ctx.strokeWidth = 2;
-        // ctx.rect(range.x - range.w,range.y - range.h,range.w * 2,range.h * 2);
-        // ctx.stroke();
-        // ctx.closePath();
+        if(RangeIsOn){
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.strokeWidth = 2;
+        ctx.rect(range.x - range.w,range.y - range.h,range.w * 2,range.h * 2);
+        ctx.stroke();
+        ctx.closePath();
+        }
 
         //let count = 0;
         let points = quadtree.query(range);

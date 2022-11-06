@@ -66,7 +66,7 @@ class QuadTree{
         if(!list){
             list = [];
         }
-        
+
         if(!this.boundries.intersect(range))
             return;
 
@@ -136,8 +136,8 @@ class QuadTree{
             ctx.strokeWidth = 2;
             ctx.rect(this.boundries.x - this.boundries.w,this.boundries.y - this.boundries.h,this.boundries.w * 2,this.boundries.h * 2);
             if(this.Data.length > 0){
-                //ctx.fillStyle = `hsl(${32 * this.Data.length},100%,50%)`;
-                ctx.fillStyle = 'green';
+                ctx.fillStyle = `hsl(${32 * this.Data.length},100%,50%)`;
+                //ctx.fillStyle = 'green';
                 ctx.fill()
             }
             ctx.stroke();
