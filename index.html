@@ -42,6 +42,18 @@
                 <label for="boidcount">Increase / Decrease Boid Number</label>
                 <input type="number" name="boidcount" id="boidcount" oninput="SwitchGrid(3)">
             </div>
+            <div>
+                <label for="cohesion">Cohesion</label>
+                <input type="checkbox" name="cohesion" id="cohesion" oninput="SwitchGrid(4)" checked>
+            </div>
+            <div>
+                <label for="alignment">Alignment</label>
+                <input type="checkbox" name="alignment" id="alignment" oninput="SwitchGrid(5)" checked>
+            </div>
+            <div>
+                <label for="separation">Separaion</label>
+                <input type="checkbox" name="separation" id="separation" oninput="SwitchGrid(6)" checked>
+            </div>
         </fieldset>
     </form>
     <canvas></canvas>

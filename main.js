@@ -9,6 +9,10 @@ const ctx = canvas.getContext('2d');
 
 let GridIsOn = false;
 let RangeIsOn = false;
+let CohesionIsOn = true;
+let AlignmentIsOn = true;
+let SeparationIsOn = true;
+
 let range;
 let Points = [];
 let DeltaTime, CurrentTime, PrevTime = 0;
@@ -18,6 +22,9 @@ const SwitchGrid = (num)=> {
         case 1: GridIsOn ? GridIsOn = false : GridIsOn = true; break;
         case 2: RangeIsOn ? RangeIsOn = false : RangeIsOn = true; break;
         case 3: CreateBoids(+document.querySelector('#boidcount').value);break; 
+        case 4: CohesionIsOn ? CohesionIsOn = false : CohesionIsOn = true; break;
+        case 5: AlignmentIsOn ? AlignmentIsOn = false : AlignmentIsOn = true; break;
+        case 6: SeparationIsOn ? SeparationIsOn = false : SeparationIsOn = true; break;
     }
 }
 
@@ -108,7 +115,11 @@ let loop = () =>{
         //let count = 0;
         let points = quadtree.query(range);
         //console.log(count)
-        boid.flock(points);
+        //boid.flock(points);
+        SeparationIsOn && boid.Separation(points);
+        AlignmentIsOn && boid.Alignment(points);
+        CohesionIsOn && boid.Cohesion(points);
+
         boid.Update(DeltaTime);
         boid.Border(0,Width,0,Height);
 
