@@ -18,25 +18,25 @@ class Rect{
     }
 }
 
-class Ball{
-    constructor(pos,vel,rad){
-        this.pos = pos;
-        this.vel = vel;
-        this.rad = rad;
-    }
+// class Ball{
+//     constructor(pos,vel,rad){
+//         this.pos = pos;
+//         this.vel = vel;
+//         this.rad = rad;
+//     }
 
-    AddVelocity(dt){
-        this.pos.x += this.vel.x * dt;
-        this.pos.y += this.vel.y * dt;
-    }
+//     AddVelocity(dt){
+//         this.pos.x += this.vel.x * dt;
+//         this.pos.y += this.vel.y * dt;
+//     }
 
-    CheckCollision(){
-        if(this.pos.x - this.rad < 0 || this.pos.x + this.rad > Width)
-            this.vel.x *= -1.0;
-        if(this.pos.y - this.rad < 0 || this.pos.y + this.rad > Height)
-            this.vel.y *= -1.0;        
-    }
-}
+//     CheckCollision(){
+//         if(this.pos.x - this.rad < 0 || this.pos.x + this.rad > Width)
+//             this.vel.x *= -1.0;
+//         if(this.pos.y - this.rad < 0 || this.pos.y + this.rad > Height)
+//             this.vel.y *= -1.0;        
+//     }
+// }
 
 class QuadTree{
     constructor(boundries, capacity, maxDepth,currDepth){

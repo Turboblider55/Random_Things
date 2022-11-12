@@ -13,6 +13,10 @@ let CohesionIsOn = true;
 let AlignmentIsOn = true;
 let SeparationIsOn = true;
 
+let RacismLevel = 1.0; // This means, there is no racism, annd as the value goes down, the racism increases
+
+let DiffColorCount = 1.0; // By default, it is one, every boid is white
+const Colors = ["white","red","green","blue","yellow"];
 let range;
 let Points = [];
 let DeltaTime, CurrentTime, PrevTime = 0;
@@ -25,22 +29,34 @@ const SwitchGrid = (num)=> {
         case 4: CohesionIsOn ? CohesionIsOn = false : CohesionIsOn = true; break;
         case 5: AlignmentIsOn ? AlignmentIsOn = false : AlignmentIsOn = true; break;
         case 6: SeparationIsOn ? SeparationIsOn = false : SeparationIsOn = true; break;
+        case 7: DiffColorCount = document.querySelector('#colorcount').value; CreateRandomColors(); break;
     }
 }
 
 const CreateBoids = (num) => {
-    if(num != Points.length){
+    //if(num != Points.length){
 
         if(Points.length < num)
-        while(Points.length < num){
-            Points.push(new Boid());
-        }
-
-        if(Points.length > num)
+            while(Points.length < num){
+                const Index = Math.floor((Math.random() * DiffColorCount));
+                Points.push(new Boid(Colors[Index >= DiffColorCount ? Index-1 : Index]));
+            }
+        else if(Points.length > num)
             Points.splice(num,Points.length)
-    }
+        // else if(Points.length == num){
+        //     const Size = Points.length;
+        //     Points = [];
+        //     CreateBoids(Size);
+        // }       
+    //}
 }
 
+const CreateRandomColors = () => {
+    for(let point of Points){
+        const Index = Math.floor((Math.random() * DiffColorCount));
+        point.ColorValue = Colors[Index >= DiffColorCount ? Index-1 : Index];
+    }
+}
 
 let MOUSE = {
     pos:new vec2(0,0),

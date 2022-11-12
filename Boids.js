@@ -1,5 +1,5 @@
 class Boid{
-    constructor(){
+    constructor(ColorValue){
         this.maxForce = 0.1;
         this.Speed = 2.0;
         this.pos = new vec2(Math.random() * Width,Math.random() * Height);
@@ -7,12 +7,13 @@ class Boid{
         this.vel.Normalise();
         this.acc = new vec2(0,0);
         this.vel.Mul(this.Speed)
+        this.ColorValue = ColorValue;
     }
 
 
     Show(ctx){
         ctx.beginPath();
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = this.ColorValue;
         let NormalDir = new vec2(this.vel.x,this.vel.y);
         NormalDir.Normalise();
         let SideDir = new vec2(-NormalDir.y,NormalDir.x);
@@ -30,7 +31,7 @@ class Boid{
     Update(dt){
         //this.vel.Mul(dt);
         this.pos.Add(this.vel);
-        //this.vel.Add(new vec2((Math.random() * 2 -1)*0.05,(Math.random() * 2 -1)*0.05))
+        this.vel.Add(new vec2((Math.random() * 2 -1)*0.05,(Math.random() * 2 -1)*0.05))
         //this.acc.Mul(dt);
         this.vel.Add(this.acc);
 
