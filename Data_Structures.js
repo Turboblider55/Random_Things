@@ -76,7 +76,7 @@ class QuadTree{
                 child.query(range,list);
             }
         }
-        else if(this.boundries.intersect(range)){
+        else{
             for(let dat of this.Data){
                 //window.count++;
                 if(range.contains(dat.pos) && (range.x != dat.pos.x && range.y != dat.pos.y))

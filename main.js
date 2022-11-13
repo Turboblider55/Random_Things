@@ -13,7 +13,7 @@ let CohesionIsOn = true;
 let AlignmentIsOn = true;
 let SeparationIsOn = true;
 
-let RacismLevel = 1.0; // This means, there is no racism, annd as the value goes down, the racism increases
+let Racism = false; 
 
 let DiffColorCount = 1.0; // By default, it is one, every boid is white
 const Colors = ["white","red","green","blue","yellow"];
@@ -21,6 +21,7 @@ let range;
 let Points = [];
 let DeltaTime, CurrentTime, PrevTime = 0;
 
+const FpsLocation = document.querySelector('#FPS')
 const SwitchGrid = (num)=> {
     switch(num){
         case 1: GridIsOn ? GridIsOn = false : GridIsOn = true; break;
@@ -30,6 +31,7 @@ const SwitchGrid = (num)=> {
         case 5: AlignmentIsOn ? AlignmentIsOn = false : AlignmentIsOn = true; break;
         case 6: SeparationIsOn ? SeparationIsOn = false : SeparationIsOn = true; break;
         case 7: DiffColorCount = document.querySelector('#colorcount').value; CreateRandomColors(); break;
+        case 8: Racism ? Racism = false: Racism = true; DiffColorCount == 1 && alert('Racism only works with multiple colors'); break;;
     }
 }
 
@@ -95,6 +97,7 @@ let loop = () =>{
     //console.log(DeltaTime)
     PrevTime = CurrentTime;
 
+    FpsLocation.innerHTML = `Fps: ${(1.0 / DeltaTime).toFixed(2)}`
     // for(let i of Points){
     //     i.AddVelocity(DeltaTime);
     //     i.CheckCollision();
@@ -134,7 +137,7 @@ let loop = () =>{
         //boid.flock(points);
         SeparationIsOn && boid.Separation(points);
         AlignmentIsOn && boid.Alignment(points);
-        CohesionIsOn && boid.Cohesion(points);
+        CohesionIsOn && boid.Cohesion(points,Racism);
 
         boid.Update(DeltaTime);
         boid.Border(0,Width,0,Height);

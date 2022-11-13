@@ -83,14 +83,20 @@ class Boid{
 
         //console.log(new vec2(avg.x,avg.y))
     }
-    Cohesion(OtherBoids){
+    Cohesion(OtherBoids,Racism){
         if(!OtherBoids.length > 0)
         return;
 
         let avgPos = new vec2(0,0);
 
         for(let Boid of OtherBoids){
-            avgPos.Add(Boid.pos);
+            let value = new vec2(Boid.pos.x,Boid.pos.y);
+            if(Racism){
+                if(Boid.ColorValue != this.ColorValue){
+                    value.Mul(-1.0);
+                }
+            }
+            avgPos.Add(value);
         }
         avgPos.Div(OtherBoids.length)
         avgPos.Sub(this.pos);

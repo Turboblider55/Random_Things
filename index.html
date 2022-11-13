@@ -30,6 +30,7 @@
     <form action="" id="Tooner">
         <fieldset>
         <legend>Things To Change</legend>
+            <p id="FPS">Fps: </p>
             <div>
                 <label for="grid">Show Grid</label>
                 <input type="checkbox" name="grid" id="grid" onclick="SwitchGrid(1)">
@@ -57,6 +58,10 @@
             <div>
                 <label for="separation">Color Count</label>
                 <input type="range" name="colorcount" id="colorcount" onchange="SwitchGrid(7)" min="1" max="5" value="1">
+            </div>
+            <div>
+                <label for="racism">Racism</label>
+                <input type="checkbox" name="racism" id="racism" oninput="SwitchGrid(8)">
             </div>
         </fieldset>
     </form>
