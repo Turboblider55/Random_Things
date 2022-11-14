@@ -58,7 +58,6 @@ class QuadTree{
         this.Children.push(new QuadTree(bl,this.capacity,this.maxDepth,(this.currDepth + 1)));
         let br = new Rect(this.boundries.x + this.boundries.w / 2,this.boundries.y + this.boundries.h / 2,this.boundries.w / 2,this.boundries.h / 2);
         this.Children.push(new QuadTree(br,this.capacity,this.maxDepth,(this.currDepth + 1)));
-
         this.divided = true;
     }
 
@@ -95,7 +94,7 @@ class QuadTree{
                     if(this.Data.length < this.capacity ){
                         this.Data.push(Element);
                     }
-                    else if(!this.divided){
+                    else{
                         this.subdivide();
 
                         this.Data.push(Element);

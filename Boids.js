@@ -48,7 +48,11 @@ class Boid{
             let d = new vec2(boid.pos.x,boid.pos.y);
             d.Sub(this.pos);
             let SepMag = -(20.0 / d.Length());
-
+            if(Racism)
+                if(boid.ColorValue != this.ColorValue)
+                    SepMag *= 3.0;
+                
+            
             d.Normalise();
             d.Mul(SepMag);
             SepForce.Add(d);
@@ -90,13 +94,8 @@ class Boid{
         let avgPos = new vec2(0,0);
 
         for(let Boid of OtherBoids){
-            let value = new vec2(Boid.pos.x,Boid.pos.y);
-            if(Racism){
-                if(Boid.ColorValue != this.ColorValue){
-                    value.Mul(-1.0);
-                }
-            }
-            avgPos.Add(value);
+            //let value = new vec2(Boid.pos.x,Boid.pos.y);
+            avgPos.Add(Boid.pos);
         }
         avgPos.Div(OtherBoids.length)
         avgPos.Sub(this.pos);
